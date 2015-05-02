@@ -1,6 +1,6 @@
-(ns tap.core-test
+(ns hydrant.core-test
   (:require [clojure.test :refer :all]
-            [tap.core :refer :all]))
+            [hydrant.core :refer :all]))
 
 (deftest a-test
   (testing "FIXME, I fail."
