@@ -9,4 +9,7 @@
 
   :main hydrant.bin
 
-  :profiles {:uberjar {:aot :all}})
+  :profiles {:uberjar {:aot :all}
+             :dev {:plugins [[lein-bin "0.3.5"]]}}
+
+  :bin {:name "hydrant" :bootclasspath :false})

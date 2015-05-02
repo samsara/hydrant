@@ -1,4 +1,5 @@
- 
+# Hydrant
+
 ![Hydrant](doc/hydrant.png).
 
 Sucks data from multiple sources and sends to multiple end points
@@ -10,16 +11,16 @@ Alpha .... very Alpha
 
 ## Usage
 
-To build ``lein uberjar``
+To build ``lein do clean, bin``
 
-TODO Add run instructions
+To run `` ./target/hydrant [path to config]``
 
 ## Configuration
 
 The configuration is currently broken into 2 parts i.e
 
--Data Sources
--Flows
+- Data Sources
+- Flows
 
 TODO explain the above 
 
