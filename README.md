@@ -17,6 +17,8 @@ To run `` ./target/hydrant [path to config]``
 
 ## Configuration
 
+The default and template configuration files can be found in config directory
+
 The configuration is currently broken into 2 parts i.e
 
 - Data Sources
