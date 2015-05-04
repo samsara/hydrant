@@ -41,6 +41,20 @@ TODO explain the above
 )
 ```
 
+## Docker
+
+The application can be turned into a docker image by running ``docker build -t samsara/hydrant .`` in the parent directory.
+
+The docker image expects certain environment variables to configure the datasources that will be used.
+
+To run the built image to consume twitter :-
+- Edit the ./config/env.list file and supply the appropriate values
+- run the command ``docker run -d --env-file ./config/env.list -v /tmp/logs/hydrant:/logs  samsara/hydrant``
+
+To view the logs, run ``tail -F /tmp/logs/hydrant/hydrant.log``
+
+The config/fig.yml file is an example of how the image can be run via fig/docker compose.
+
 ## License
 
 Copyright © 2015 FIXME
