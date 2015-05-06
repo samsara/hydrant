@@ -6,7 +6,9 @@
 ;;USE_TWITTER_SRC 
 ;;USE_TWITTER_SRC                  {:track "%%TWITTER_HASHTAGS%%"}) 
 
-                 
+;;USE_WEB_SRC (web-source {:root-url "%%WEB_ROOT_URL%%"
+;;USE_WEB_SRC              :page-crawl-limit %%WEB_PAGE_CRAWL_LIMIT%%})
+
 (flows
        #(log/info %) 
 )
