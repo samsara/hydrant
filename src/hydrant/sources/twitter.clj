@@ -1,4 +1,4 @@
-(ns hydrant.twitter
+(ns hydrant.sources.twitter
   (:require [hydrant.service :refer [Service]]
             [hydrant.core :refer [add-data-source data-to-flows]]
             [twitter.oauth :as oauth]

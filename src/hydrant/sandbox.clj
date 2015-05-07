@@ -1,7 +1,7 @@
 (ns hydrant.sandbox
   (:require [hydrant.core :refer [flows]]
-            [hydrant.twitter :refer [twitter-source]]
-            [hydrant.web :refer [web-source]]
+            [hydrant.sources.twitter :refer [twitter-source]]
+            [hydrant.sources.web :refer [web-source]]
             [taoensso.timbre :as log]))
 
 

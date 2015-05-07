@@ -1,4 +1,4 @@
-(ns hydrant.web
+(ns hydrant.sources.web
   (:require [itsy.core :as spider]
             [hydrant.service :refer [Service]]
             [hydrant.core :refer [add-data-source data-to-flows]]
