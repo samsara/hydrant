@@ -2,6 +2,7 @@
   (:require [hydrant.core :refer [flows]]
             [hydrant.sources.twitter :refer [twitter-source]]
             [hydrant.sources.web :refer [web-source]]
+            [hydrant.flows.samsara :refer [samsara]]
             [taoensso.timbre :as log]))
 
 
