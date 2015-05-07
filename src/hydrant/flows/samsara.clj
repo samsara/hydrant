@@ -13,10 +13,11 @@
   ([opts]
    (let [url (:url opts)]
      (fn [events]
-       (let [resp  @(http/post url
-                               {:headers {"Content-Type" "application/json"}
+       (let [resp  (http/post url
+                               {:headers {"Content-Type" "application/json"
+                                          "X-Samsara-publishedTimestamp" (System/currentTimeMillis)}
                                 :body (json/write-str events)})]
-         (log/debug "HTTP Response ->" resp))))))
+         (log/debug "Sent " (count events) " events to samsara. Http Response status " (:status @resp)))))))
 
 
 

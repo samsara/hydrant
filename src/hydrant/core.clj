@@ -22,9 +22,10 @@
       add-flow))
 
 
-(defn data-to-flows [d]
-  (doseq [flow (:flows @nucleus)]
-    (flow d)))
+(defn events-to-flows [events]
+  (when-not (empty? events)
+    (doseq [flow (:flows @nucleus)]
+      (flow events))))
 
 (defn update-service-fn [old-s new-s]
   (when (some? old-s)

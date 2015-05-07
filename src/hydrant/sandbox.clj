@@ -1,5 +1,6 @@
 (ns hydrant.sandbox
   (:require [hydrant.core :refer [flows]]
+            [hydrant.utils :refer [sensibly-print-events log-level]]
             [hydrant.sources.twitter :refer [twitter-source]]
             [hydrant.sources.web :refer [web-source]]
             [hydrant.flows.samsara :refer [samsara]]

@@ -1,7 +1,7 @@
 (ns hydrant.sources.web
   (:require [itsy.core :as spider]
             [hydrant.service :refer [Service]]
-            [hydrant.core :refer [add-data-source data-to-flows]]
+            [hydrant.core :refer [add-data-source events-to-flows]]
             [taoensso.timbre :as log]))
 
 
@@ -17,7 +17,7 @@
 
 (defn crawler-fn [root-url url body]
   (let [event (generate-event root-url url body)]
-    (data-to-flows event)))
+    (events-to-flows (vector event))))
 
 (defn create-crawler [root-url url-limit]
   (spider/crawl {:url root-url

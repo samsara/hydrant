@@ -1,6 +1,6 @@
 (ns hydrant.sources.twitter
   (:require [hydrant.service :refer [Service]]
-            [hydrant.core :refer [add-data-source data-to-flows]]
+            [hydrant.core :refer [add-data-source events-to-flows]]
             [twitter.oauth :as oauth]
             [twitter-streaming-client.core :as client]
             [taoensso.timbre :as log]))
@@ -29,8 +29,7 @@
 (defn process-queues [queues tweet-transformer]
   (let [tweets (:tweet queues)
         transformed-tweets (map tweet-transformer tweets)]
-    (data-to-flows transformed-tweets)
-    (log/debug "TwitterSource sent data to flows ->" transformed-tweets)))
+    (events-to-flows transformed-tweets)))
 
 
 

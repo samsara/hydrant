@@ -13,6 +13,8 @@
 
   :main hydrant.bin
 
+  :resource-paths ["resources/"]
+
   :profiles {:uberjar {:aot :all}
              :dev {:plugins [[lein-bin "0.3.5"]]}}
 

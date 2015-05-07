@@ -1,3 +1,6 @@
+;;;;;Valid Log levels are [:trace :debug :info :warn :error :fatal :report]
+(log-level :debug)
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;SOURCES OF DATA
 ;;USE_TWITTER_SRC (twitter-source {:con-key "%%TWITTER_CONSUMER_KEY%%"
 ;;USE_TWITTER_SRC                  :con-secret "%%TWITTER_CONSUMER_SECRET%%"
@@ -9,6 +12,9 @@
 ;;USE_WEB_SRC (web-source {:root-url "%%WEB_ROOT_URL%%"
 ;;USE_WEB_SRC              :page-crawl-limit %%WEB_PAGE_CRAWL_LIMIT%%})
 
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;FLOWS
 (flows
-       #(log/info %) 
+       sensibly-print-events 
+       (samsara)
 )
