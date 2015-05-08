@@ -21,10 +21,10 @@ The default and template configuration files can be found in config directory
 
 The configuration is currently broken into 2 parts i.e
 
-- Data Sources
-- Flows
+- Data Sources : These are sources of streaming data. Currently Twitter (see twitter-source in config) and traversing a web page (see web-source in config)
 
-TODO explain the above 
+- Flows : These are components (actually functions) that take a sequence of events/data from the sources and process them.
+
 
 ```clojure
 ;;Define where the different sources of data
@@ -35,15 +35,22 @@ TODO explain the above
 
                  {:track "SPACE SEPERATED HASHTAGS"}) 
 
+(web-source {:root-url "http://www.google.com"
+             :page-crawl-limit 50})
                  
 (flows
-       #(log/info %) 
+       sensibly-print-events
+       ;;(samsara)
 )
 ```
 
 ## Docker
 
-The application can be turned into a docker image by running ``docker build -t samsara/hydrant .`` in the parent directory.
+The application can be turned into a docker image by :
+
+- Building the application in the parent directory ``lein do clean, bin``
+
+- Building the image in the parent directory ``docker build -t samsara/hydrant .`` 
 
 The docker image expects certain environment variables to configure the datasources that will be used.
 
