@@ -7,9 +7,7 @@
 
 
 (defn generate-event [root-url url body]
-  {:timestamp (System/currentTimeMillis)
-   :sourceId url
-   :rootUrl root-url
+  {:rootUrl root-url
    :eventName "web-crawl"
    :url url
    :body body

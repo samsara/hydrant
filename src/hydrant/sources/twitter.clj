@@ -10,12 +10,12 @@
              (.setLenient true)))
 
 (defn default-tweet-transformer [m]
-  {:timestamp (->> (:created_at m) (.parse tweet-date-formatter) (.getTime))
-  :sourceId (get-in m [:user :name])
-  :eventName "tweet"
-  :twitter-user (get-in m [:user :name])
-  :location (get-in m [:user :location])
-  :tweet (:text m)})
+  (let [tweet-timestamp (->> (:created_at m) (.parse tweet-date-formatter) (.getTime))]
+    {:eventName "tweet"
+     :twitter-user (get-in m [:user :name])
+     :location (get-in m [:user :location])
+     :tweet (:text m)
+     :tweetCreatedAt tweet-timestamp}))
 
 (defn create-stream [^String con-key
                      ^String con-secret
