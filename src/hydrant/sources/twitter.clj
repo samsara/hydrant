@@ -9,13 +9,20 @@
 (def tweet-date-formatter (doto (java.text.SimpleDateFormat. tweet-time-format java.util.Locale/ENGLISH)
              (.setLenient true)))
 
+(defn generate-event [t]
+  (assoc t :eventSource "twitter-source"
+           :eventName "tweet"))
+
 (defn default-tweet-transformer [m]
   (let [tweet-timestamp (->> (:created_at m) (.parse tweet-date-formatter) (.getTime))]
-    {:eventName "tweet"
-     :twitter-user (get-in m [:user :name])
+    {:twitter-user (get-in m [:user :name])
      :location (get-in m [:user :location])
      :tweet (:text m)
      :tweetCreatedAt tweet-timestamp}))
+
+(defn convert-to-events [tweet-seq tweet-transformer]
+  ;;really really tempted to use tranducers here
+  (map (comp generate-event tweet-transformer) tweet-seq))
 
 (defn create-stream [^String con-key
                      ^String con-secret
@@ -27,9 +34,9 @@
                                   :oauth-creds creds :params streaming-params)))
 
 (defn process-queues [queues tweet-transformer]
-  (let [tweets (:tweet queues)
-        transformed-tweets (map tweet-transformer tweets)]
-    (events-to-flows transformed-tweets)))
+ (let [tweet-seq (:tweet queues)
+        events (convert-to-events tweet-seq tweet-transformer)]
+    (events-to-flows events)))
 
 
 

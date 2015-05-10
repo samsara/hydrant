@@ -7,8 +7,9 @@
 
 
 (defn generate-event [root-url url body]
-  {:rootUrl root-url
+  {:eventSource "web-source"
    :eventName "web-crawl"
+   :rootUrl root-url
    :url url
    :body body
    :bodyByteSize (count (.getBytes body))})
