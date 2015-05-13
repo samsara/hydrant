@@ -13,22 +13,14 @@
    (some (partial f target-val) poss-vals)))
 
 
-(defmacro call-flows [events  flows]
-  `(do
-     ~@(map #(list % events) flows))
-;;  `(do
-;;     (doseq [flow# ~flows]
-;;       (try
-;;         (flow# ~events)
-;;         (catch Throwable t#
-;;           (log/warn t#))))
-;;  )
-)
-
 (defmacro filter-source [pred & body]
   `(fn [events#]
      (when (~pred (-> events# first :eventSource))
-      (call-flows events# ~body))))
+       (doseq [f# [~@body]]
+         (try
+           ((f#) events#)
+           (catch Throwable t#
+             (log/warn f# " threw " t#)))))))
 
 
 (defn sensibly-print-events [events]
