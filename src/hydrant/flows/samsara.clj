@@ -23,28 +23,26 @@
   (assoc event :timestamp timestamp :sourceId sourceId :eventName eventName))
 
 
-(defn- send-to-endpoint [{:keys [url]}]
-  (fn [events]
-    (let [events (map event->samsara-event events)
-          resp  (http/post (str  url "/events")
-                               {:headers {"Content-Type" "application/json"
-                                          "X-Samsara-publishedTimestamp" (System/currentTimeMillis)}
-                                :body (json/write-str events)})]
-         (log/debug "Sent " (count events) " events directly to samsara endpoint. Http Response status " (:status @resp)))))
+(defn- send-to-endpoint [{:keys [url]} events]
+  (let [events (map event->samsara-event events)
+        resp  (http/post (str  url "/events")
+                         {:headers {"Content-Type" "application/json"
+                                    "X-Samsara-publishedTimestamp" (System/currentTimeMillis)}
+                          :body (json/write-str events)})]
+    (log/debug "Sent " (count events) " events directly to samsara endpoint. Http Response status " (:status @resp))))
 
 
 
-(defn- send-via-cli [conf]
+(defn- send-via-cli [conf events ]
   (cli/set-config! conf)
-  (fn [events]
-    (cli/publish-events (map event->samsara-event events))
-    (log/debug "Sent " (count events) " events to samsara." )))
+  (cli/publish-events (map event->samsara-event events))
+  (log/debug "Sent " (count events) " events to samsara."))
 
 (defn samsara
-  ([]
-   (samsara default-config))
+  ([events]
+   (samsara default-config events ))
 
-  ([conf]
-   #_(send-via-cli conf)
-   (send-to-endpoint conf)))
+  ([conf events]
+   #_(send-via-cli conf events)
+   (send-to-endpoint conf events)))
 

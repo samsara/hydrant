@@ -18,7 +18,7 @@
      (when (~pred (-> events# first :eventSource))
        (doseq [f# [~@body]]
          (try
-           ((f#) events#)
+           (f# events#)
            (catch Throwable t#
              (log/warn f# " threw " t#)))))))
 
