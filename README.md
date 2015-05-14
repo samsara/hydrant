@@ -7,7 +7,7 @@ Sucks data from multiple sources and sends to multiple end points
 \*\*Inspired by Riemann\*\*
 
 ## Status
-Alpha .... very Alpha
+Alpha 
 
 ## Usage
 
@@ -25,6 +25,7 @@ The configuration is currently broken into 2 parts i.e
 
 - Flows : These are components (actually functions) that take a sequence of events/data from the sources and process them.
 
+The following is an example configuration. This configuration will suck data from twitter and at the same time suck data by crawling a webpage, it will print each data (events) from crawling the page and send the twitter data (events) to samsara-ingestion-api
 
 ```clojure
 ;;Define where the different sources of data
@@ -39,8 +40,15 @@ The configuration is currently broken into 2 parts i.e
              :page-crawl-limit 50})
                  
 (flows
-       sensibly-print-events
-       ;;(samsara)
+
+  (filter-source (match-any["web-source"])
+    sensibly-print-events
+  )
+
+  (filter-source (match-any["twitter-source"])
+    samsara
+  )
+
 )
 ```
 
